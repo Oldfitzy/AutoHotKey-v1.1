@@ -64,7 +64,7 @@ Else ;checks to make sure all the PS1 files are up to date by doing a comparison
 }
 
 ;Sets a default for the following variables, in case they are not read from the file, it will load the default
-AllDefaultCoords := {CurrentMarqCoordinatesX:0, CurrentMarqCoordinatesY:0, MarqueeFullSize:true, CurrentContCoordinatesX:0, CurrentContCoordinatesY:258, MagicContextColor:"50ff1b", MagicContextFontColor:"Black", MagicMarqueeColor:"b2f3f4", MagicMarqueeFontColor:"Black", AIOColorChoice:"1db4d4", AIOFontColorChoice:"Black", AIOPositionX:0, AIOPositionY:0, CurrentCoordinatesX:0, CurrentCoordinatesY:0, UtilAlwaysOnTop:true, UtilMarqAlwaysOnTop:true, MagicContextShow:true, UtilColorChoice:"1db4d4", SecondClipBoard:"SecondaryPaste", AIOAlwayOnTop:true, UtilFontColor:"Black"}
+AllDefaultCoords := {CurrentMarqCoordinatesX:0, CurrentMarqCoordinatesY:0, MarqueeFullSize:true, CurrentContCoordinatesX:0, CurrentContCoordinatesY:258, MagicContextColor:"50ff1b", MagicContextFontColor:"Black", MagicMarqueeColor:"b2f3f4", MagicMarqueeFontColor:"Black", AIOColorChoice:"1db4d4", AIOFontColorChoice:"Black", AIOPositionX:0, AIOPositionY:0, CurrentCoordinatesX:0, CurrentCoordinatesY:0, UtilAlwaysOnTop:false, UtilMarqAlwaysOnTop:false, MagicContextShow:false, UtilColorChoice:"1db4d4", SecondClipBoard:"SecondaryPaste", AIOAlwayOnTop:false, UtilFontColor:"Black"}
 ;Reads the file, splits the lines at the equals sign. If the first part of the split is in the AllDefaultCoords array then the value is updated to what is found
 Loop, Read, C:\AHKLocal\ToolBarSettings.txt
 {
@@ -491,7 +491,7 @@ Return
 
 
 SaveCoords:
-    ; Get GUI window positions (replace with more robust methods)
+    ; Get GUI window positions
     WinGetPos, CurrentCoordinatesX, CurrentCoordinatesY 
     WinGetPos, AIOPositionX, AIOPositionY, ,, AIOCenter
     WinGetPos, CurrentMarqCoordinatesX, CurrentMarqCoordinatesY, ,, ITSDMarquee
@@ -504,14 +504,20 @@ SaveCoords:
     {
         CloseSplit := StrSplit(A_LoopReadLine, "=")
         CloseKey := CloseSplit.1
-        CloseValue := CloseSplit[2] 
+        CloseValue := CloseSplit[2] ; Extract the value after the "="
         AllDefaultCoords[CloseKey] := CloseValue 
     }
 
     ; Update settings
     AllDefaultCoords["AIOPositionX"] := AIOPositionX
     AllDefaultCoords["AIOPositionY"] := AIOPositionY
-    ; ... (Update other settings similarly)
+    AllDefaultCoords["CurrentCoordinatesX"] := CurrentCoordinatesX
+    AllDefaultCoords["CurrentCoordinatesY"] := CurrentCoordinatesY
+    AllDefaultCoords["CurrentMarqCoordinatesX"] := CurrentMarqCoordinatesX
+    AllDefaultCoords["CurrentMarqCoordinatesY"] := CurrentMarqCoordinatesY
+    If WinExist("ContextTips") 
+        AllDefaultCoords["CurrentContCoordinatesX"] := CurrentContCoordinatesX
+        AllDefaultCoords["CurrentContCoordinatesY"] := CurrentContCoordinatesY 
 
     ; Write settings to file
     FileDelete, C:\AHKLocal\ToolBarSettings.txt
