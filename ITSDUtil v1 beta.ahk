@@ -3,10 +3,11 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #SingleInstance
-ITSDVersion := "June 13, 2019" ;Made up relase date for all the new changes, probably wont happen at the said date
+ITSDVersion := "January 15 2025 v1.1.37.02" ;Made up relase date for all the new changes, probably wont happen at the said date
+; Mark Fitzgerald was here - ADMIN
 
-;ITSDAgents := {bba9485:"Blakely", cc1702:"Barb", ccwh942:"Caleb", mfh0174:"Mark", mwl8513:"Michael", rxp3594:"Roger", gtc9168:"Grant", rrj0821:"Ryan", hrv8522:"Holly", jse9741:"Jonah", jpr4955:"JonahP", ree6258:"Jodi", jnx4955:"Jonah P."}
-ITSDAgents := {cc1719:"Diane", cc1702:"Barb", ccwh942:"Caleb", bba9485:"Blakely", mfh0174:"Mark", bdo4094:"Brad", jbm6302:"Justin", rxp3594:"Roger", jpr4955:"Jonah", ccs1064:"Chris", ppd7499:"Phil", ktb6384:"Kong", rvb3600:"Roberto", ckj3435:"Colin", jwj6648:"John", clg0585:"Chris", gbn1535:"Gerardo", cmw1766:"Caleb", nsp8416:"Nathan", jhq7747:"James", ars9152:"Alan", mwl8513:"Michael", jse9741:"Jonah", gtc9168:"Grant"}
+;ITSDAgents := {bba9485:"Blakely", cc1702:"Barb", mfh0174:"Mark", mwl8513:"Michael", rxp3594:"Roger", gtc9168:"Grant", rrj0821:"Ryan", hrv8522:"Holly", jse9741:"Jonah", jpr4955:"JonahP", ree6258:"Jodi", jnx4955:"Jonah P."}
+ITSDAgents := {cc1719:"Diane", cc1702:"Barb", bba9485:"Blakely", mfh0174:"Mark", bdo4094:"Brad", jbm6302:"Justin", rxp3594:"Roger", jpr4955:"Jonah", ccs1064:"Chris", ppd7499:"Phil", ktb6384:"Kong", rvb3600:"Roberto", ckj3435:"Colin", jwj6648:"John", clg0585:"Chris", gbn1535:"Gerardo", cmw1766:"Caleb", nsp8416:"Nathan", jhq7747:"James", ars9152:"Alan", mwl8513:"Michael", jse9741:"Jonah", gtc9168:"Grant"}
 ScriptUserID := ITSDAgents[A_Username]
 RealUser := false
 Random, NewNewSeed
@@ -64,7 +65,7 @@ Else ;checks to make sure all the PS1 files are up to date by doing a comparison
 }
 
 ;Sets a default for the following variables, in case they are not read from the file, it will load the default
-AllDefaultCoords := {CurrentMarqCoordinatesX:0, CurrentMarqCoordinatesY:0, MarqueeFullSize:true, CurrentContCoordinatesX:0, CurrentContCoordinatesY:258, MagicContextColor:"50ff1b", MagicContextFontColor:"Black", MagicMarqueeColor:"b2f3f4", MagicMarqueeFontColor:"Black", AIOColorChoice:"1db4d4", AIOFontColorChoice:"Black", AIOPositionX:0, AIOPositionY:0, CurrentCoordinatesX:0, CurrentCoordinatesY:0, UtilAlwaysOnTop:false, UtilMarqAlwaysOnTop:false, MagicContextShow:false, UtilColorChoice:"1db4d4", SecondClipBoard:"SecondaryPaste", AIOAlwayOnTop:false, UtilFontColor:"Black"}
+AllDefaultCoords := {CurrentMarqCoordinatesX:0, CurrentMarqCoordinatesY:0, MarqueeFullSize:true, CurrentContCoordinatesX:0, CurrentContCoordinatesY:0, MagicContextColor:"50ff1b", MagicContextFontColor:"Black", MagicMarqueeColor:"b2f3f4", MagicMarqueeFontColor:"Black", AIOColorChoice:"1db4d4", AIOFontColorChoice:"Black", AIOPositionX:0, AIOPositionY:0, CurrentCoordinatesX:0, CurrentCoordinatesY:0, UtilAlwaysOnTop:false, UtilMarqAlwaysOnTop:false, MagicContextShow:false, UtilColorChoice:"1db4d4", SecondClipBoard:"SecondaryPaste", AIOAlwayOnTop:false, UtilFontColor:"Black"}
 ;Reads the file, splits the lines at the equals sign. If the first part of the split is in the AllDefaultCoords array then the value is updated to what is found
 Loop, Read, C:\AHKLocal\ToolBarSettings.txt
 {
@@ -520,7 +521,7 @@ SaveCoords:
         AllDefaultCoords["CurrentContCoordinatesY"] := CurrentContCoordinatesY 
 
     ; Write settings to file
-    FileDelete, C:\AHKLocal\ToolBarSettings.txt
+    ;FileDelete, C:\AHKLocal\ToolBarSettings.txt
     For key, value in AllDefaultCoords
         FileAppend, %key%=%value%`n, C:\AHKLocal\ToolBarSettings.txt
 
@@ -1313,7 +1314,7 @@ Return
 
 ;---------------------------------------------------------------------------
 
-;(Kyle) already used letters/numbers - s x u j i o q m p k a c r v l w z 1 2 3 space 
+;(Mark) already used letters/numbers - s x u j i o q m p k a c r v l w z 1 2 3 space 
 
 
 
@@ -2590,9 +2591,7 @@ Return
 ; Paul Troiano, 6/2014
 ; Updated by Ashley Dawson 7/2015
 ; Updated by Ryan Webster 11/8/2017
-; Colin Kern was also here - ADMIN
-; Kyle was also here - ADMIN
-; Zach was also here 
+; Mark Fitzgerald was also here - ADMIN
 
 ITSDToolbarButtonFixWins:
   WinGetActiveTitle, SavedActiveWindow
